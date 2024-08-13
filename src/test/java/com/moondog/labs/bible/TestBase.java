@@ -1,7 +1,5 @@
 package com.moondog.labs.bible;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -15,14 +13,15 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import wiremock.org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import wiremock.org.apache.hc.client5.http.impl.classic.HttpClients;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
 
 @SpringBootTest
 public class TestBase {
     private static final WireMockServer wireMockServer = new WireMockServer();
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-    private static final CloseableHttpClient httpClient = HttpClients.createDefault();
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     private WebApplicationContext context;
