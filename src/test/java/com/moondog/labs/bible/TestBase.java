@@ -2,14 +2,13 @@ package com.moondog.labs.bible;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.http.Body;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -53,8 +52,10 @@ public class TestBase {
         }
     }
 
-    protected EasyRequestResponseBuilder easyRequestResponseBuilder() {
+    protected EasyRequestResponseBuilder easyRequestResponseBuilder(HttpMethod httpMethod, String urlMatchPattern) {
         return new EasyRequestResponseBuilder()
-                .withObjectMapper(objectMapper);
+                .withObjectMapper(objectMapper)
+                .withMethod(httpMethod)
+                .withUrlMatchPattern(urlMatchPattern);
     }
 }

@@ -1,18 +1,17 @@
 package com.moondog.labs.bible;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.http.Body;
 import com.github.tomakehurst.wiremock.matching.UrlPathPattern;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-
 import java.util.Map;
 import java.util.function.Function;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 public class EasyRequestResponseBuilder {
     private HttpMethod method;
@@ -72,11 +71,9 @@ public class EasyRequestResponseBuilder {
         }
     }
 
-    private static final Map<HttpMethod, Function<UrlPathPattern, MappingBuilder>> methodMapping =
-            Map.of(
-                    HttpMethod.GET, WireMock::get,
-                    HttpMethod.POST, WireMock::post,
-                    HttpMethod.PUT, WireMock::put,
-                    HttpMethod.DELETE, WireMock::delete
-            );
+    private static final Map<HttpMethod, Function<UrlPathPattern, MappingBuilder>> methodMapping = Map.of(
+            HttpMethod.GET, WireMock::get,
+            HttpMethod.POST, WireMock::post,
+            HttpMethod.PUT, WireMock::put,
+            HttpMethod.DELETE, WireMock::delete);
 }
