@@ -18,17 +18,17 @@ class BibleControllerTest extends TestBase {
                 .withMethod(HttpMethod.GET)
                 .withUrlMatchPattern(".*Romans%208:37.*")
                 .withResponseBody(Instancio.of(Passage.class)
-                        .set(field(Passage.class, "reference"), "Romans 8:37")
+                        .set(field(Passage::getReference), "Romans 8:37")
                         .set(
-                                field(Passage.class, "verses"),
-                                List.of(Instancio.of(Verse.class)
-                                        .set(field(Verse.class, "text"), "No in all these things . . .")
-                                        .create()))
+                                field(Passage::getVerses),
+                                Instancio.ofList(Verse.class)
+                                        .set(field(Verse::getText), "No in all these things . . .")
+                                        .create())
                         .create())
                 .withStatus(HttpStatus.OK)
                 .build();
 
-        execute(MockMvcRequestBuilders.get("/bible/Romans/8/37"))
+        executeGet("/bible/Romans/8/37")
                 .andExpectAll(
                         status().isOk(),
                         jsonPath("$.reference").value("Romans 8:37"),
