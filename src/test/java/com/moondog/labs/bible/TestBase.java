@@ -1,5 +1,7 @@
 package com.moondog.labs.bible;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -13,8 +15,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
 
 @SpringBootTest
 public class TestBase {
@@ -48,11 +48,8 @@ public class TestBase {
         }
     }
 
-    protected Body asBody(final Object object) {
-        try {
-            return new Body(objectMapper.writeValueAsString(object));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+    protected EasyRequestResponseBuilder easyRequestResponseBuilder() {
+        return new EasyRequestResponseBuilder()
+                .withObjectMapper(objectMapper);
     }
 }
