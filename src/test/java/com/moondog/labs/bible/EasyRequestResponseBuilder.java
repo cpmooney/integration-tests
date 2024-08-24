@@ -18,33 +18,28 @@ public class EasyRequestResponseBuilder {
     private String urlMatchPattern;
     private Object responseBody;
     private HttpStatus status;
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-    public static EasyRequestResponseBuilder builder() {
-        return new EasyRequestResponseBuilder();
-    }
-
-    public EasyRequestResponseBuilder withObjectMapper(ObjectMapper objectMapper) {
+    public EasyRequestResponseBuilder(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
-        return this;
     }
 
-    public EasyRequestResponseBuilder withMethod(HttpMethod method) {
+    public EasyRequestResponseBuilder method(HttpMethod method) {
         this.method = method;
         return this;
     }
 
-    public EasyRequestResponseBuilder withUrlMatchPattern(String urlMatchPattern) {
+    public EasyRequestResponseBuilder urlMatchPattern(String urlMatchPattern) {
         this.urlMatchPattern = urlMatchPattern;
         return this;
     }
 
-    public EasyRequestResponseBuilder withResponseBody(Object responseBody) {
+    public EasyRequestResponseBuilder responseBody(Object responseBody) {
         this.responseBody = responseBody;
         return this;
     }
 
-    public EasyRequestResponseBuilder withStatus(HttpStatus status) {
+    public EasyRequestResponseBuilder responseStatus(HttpStatus status) {
         this.status = status;
         return this;
     }

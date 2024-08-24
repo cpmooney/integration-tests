@@ -12,8 +12,10 @@ import org.springframework.http.HttpStatus;
 class BibleControllerTest extends TestBase {
     @Test
     void getVerse() throws Exception {
-        easyRequestResponseBuilder(HttpMethod.GET, ".*Romans%208:37.*")
-                .withResponseBody(Instancio.of(Passage.class)
+        easyRequestResponseBuilder()
+                .method(HttpMethod.GET)
+                .urlMatchPattern(".*Romans%208:37.*")
+                .responseBody(Instancio.of(Passage.class)
                         .set(field(Passage::getReference), "Romans 8:37")
                         .set(
                                 field(Passage::getVerses),
@@ -21,7 +23,7 @@ class BibleControllerTest extends TestBase {
                                         .set(field(Verse::getText), "No in all these things . . .")
                                         .create())
                         .create())
-                .withStatus(HttpStatus.OK)
+                .responseStatus(HttpStatus.OK)
                 .build();
 
         executeGet("/bible/Romans/8/37")

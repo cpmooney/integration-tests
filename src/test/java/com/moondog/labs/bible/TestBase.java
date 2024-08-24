@@ -52,10 +52,7 @@ public class TestBase {
         }
     }
 
-    protected EasyRequestResponseBuilder easyRequestResponseBuilder(HttpMethod httpMethod, String urlMatchPattern) {
-        return new EasyRequestResponseBuilder()
-                .withObjectMapper(objectMapper)
-                .withMethod(httpMethod)
-                .withUrlMatchPattern(urlMatchPattern);
+    protected EasyRequestResponseBuilder easyRequestResponseBuilder() {
+        return new EasyRequestResponseBuilder(objectMapper);
     }
 }
