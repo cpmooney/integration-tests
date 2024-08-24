@@ -1,10 +1,10 @@
 package com.moondog.labs.bible;
 
-import static org.instancio.Select.field;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.instancio.Instancio;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -15,14 +15,13 @@ class BibleControllerTest extends TestBase {
         easyRequestResponseBuilder()
                 .method(HttpMethod.GET)
                 .urlMatchPattern(".*Romans%208:37.*")
-                .responseBody(Instancio.of(Passage.class)
-                        .set(field(Passage::getReference), "Romans 8:37")
-                        .set(
-                                field(Passage::getVerses),
-                                Instancio.ofList(Verse.class)
-                                        .set(field(Verse::getText), "No in all these things . . .")
-                                        .create())
-                        .create())
+                .responseBody(
+                        Passage.class,
+                        Map.of(
+                                "getReference",
+                                "Romans 8:37",
+                                "getVerses",
+                                List.of(Map.of("getText", "No in all these things . . ."))))
                 .responseStatus(HttpStatus.OK)
                 .build();
 

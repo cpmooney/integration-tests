@@ -1,0 +1,28 @@
+mockCalls:
+  - request:
+      method: "GET"
+      urlMatchPattern: ".*Romans%208:37.*"
+    response:
+      status: 200
+      bodyType: "Passage"
+      body:
+        getReference: "Romans 8:37"
+        getVerses:
+          - getText: "No in all these things . . ."
+  - request:
+      method: "GET"
+      urlMatchPattern: ".*Romans%208:38.*"
+    response:
+      status: 200
+      bodyType: "Passage"
+      body:
+        getReference: "Romans 8:37"
+        getVerses:
+          - getText: "No in all these things . . ."
+
+expect:
+  status: 200
+  body:
+    reference: "Romans 8:37"
+    verses:
+      - text: "No in all these things . . ."

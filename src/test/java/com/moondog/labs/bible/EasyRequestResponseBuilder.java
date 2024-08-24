@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
 public class EasyRequestResponseBuilder {
     private HttpMethod method;
     private String urlMatchPattern;
-    private Object responseBody;
+    private Map<String, Object> responseBody;
     private HttpStatus status;
     private final ObjectMapper objectMapper;
 
@@ -34,7 +34,7 @@ public class EasyRequestResponseBuilder {
         return this;
     }
 
-    public EasyRequestResponseBuilder responseBody(Object responseBody) {
+    public EasyRequestResponseBuilder responseBody(Class<?> clazz, Map<String, Object> responseBody) {
         this.responseBody = responseBody;
         return this;
     }
